@@ -71,4 +71,4 @@ d. Close the Eclipse IDE and open it again
 e. Clean all the Projects and rebuild the projects
 f. Refersh the project
 
-[Lombok installation]: 
+[Lombok installation]: https://gitlab.com/classpath-spring-core/spring-boot-examples/-/blob/master/assets/lombok.png
