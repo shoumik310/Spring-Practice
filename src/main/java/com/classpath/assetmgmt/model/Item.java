@@ -8,6 +8,7 @@ import lombok.*;
 @Getter
 @ToString
 @EqualsAndHashCode
+@Builder
 public class Item {
 
     private long id;

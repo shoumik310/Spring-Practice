@@ -3,11 +3,22 @@ package com.classpath.assetmgmt.dao;
 import com.classpath.assetmgmt.model.Item;
 import org.springframework.stereotype.Repository;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
 @Repository
 public class ItemDAOImpl implements ItemDAO<Item> {
+
+    private static Set<Item> items = new HashSet<>(
+            Arrays.asList(
+                    Item.builder().name("book").price(550).build(),
+                    Item.builder().name("pen").price(45).build(),
+                    Item.builder().name("keyboard").price(45).build()
+                    ));
+
+
 
     @Override
     public Item save(Item item) {
@@ -16,7 +27,7 @@ public class ItemDAOImpl implements ItemDAO<Item> {
 
     @Override
     public Set<Item> fetchAll() {
-        return null;
+        return items;
     }
 
     @Override
