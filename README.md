@@ -45,3 +45,21 @@ Spring boot applications can be deployed with
    ```bash
     java -jar helloworld.jar
    ```
+   
+## Setting up Lombok for generating boilerplate code
+1. Add the maven dependency 
+```xml
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+    </dependency>
+
+```
+
+2. Run the following command 
+
+```bash
+java -jar lombok-1.18.12.jar
+```
+
+2. Eclipse Users follow the steps    
