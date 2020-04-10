@@ -1,0 +1,17 @@
+package com.classpath.assetmgmt.model;
+
+import lombok.*;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
+@ToString
+@EqualsAndHashCode
+public class Item {
+
+    private long id;
+    private String name;
+    private double price;
+
+}
