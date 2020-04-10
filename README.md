@@ -64,11 +64,11 @@ java -jar lombok-1.18.12.jar
 
 3. Eclipse Users follow the steps    
 
-a. Download the jar from the website - https://projectlombok.org/download
-b. Run the jar ``java -jar lombok-1.18.12.jar``
-c. Select the instalable
-d. Close the Eclipse IDE and open it again
-e. Clean all the Projects and rebuild the projects
-f. Refersh the project
+1. Download the jar from the website - https://projectlombok.org/download
+2. Run the jar ``java -jar lombok-1.18.12.jar``
+3. Select the instalable
+4. Close the Eclipse IDE and open it again
+5. Clean all the Projects and rebuild the projects
+6. Refersh the project
 
-[Lombok installation]: https://gitlab.com/classpath-spring-core/spring-boot-examples/-/blob/master/assets/lombok.png
+![Lombok installation](https://gitlab.com/classpath-spring-core/spring-boot-examples/-/blob/master/assets/lombok.png)
