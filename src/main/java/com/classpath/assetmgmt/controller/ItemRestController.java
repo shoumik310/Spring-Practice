@@ -6,6 +6,7 @@ import com.classpath.assetmgmt.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -20,12 +21,14 @@ public class ItemRestController {
     }
 
     @PostMapping()
-    public Item acceptItem (Item item){
+    public Item acceptItem (@RequestBody Item item){
+        System.out.println("Inside the post method ::::");
+        System.out.println(item);
         return this.itemService.saveItem(item);
     }
 
     @GetMapping()
-    public Set<Item> findAll(){
+    public List<Item> findAll(){
         return this.itemService.fetchAllItems();
     }
 

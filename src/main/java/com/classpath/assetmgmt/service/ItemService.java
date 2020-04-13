@@ -3,7 +3,7 @@ package com.classpath.assetmgmt.service;
 import com.classpath.assetmgmt.exception.ItemNotFoundException;
 import com.classpath.assetmgmt.model.Item;
 
-import java.util.Set;
+import java.util.List;
 
 public interface ItemService {
 
@@ -11,7 +11,7 @@ public interface ItemService {
 
     Item updateItem(long itemId, Item item);
 
-    Set<Item> fetchAllItems();
+    List<Item> fetchAllItems();
 
     Item findItemById(long itemId) throws ItemNotFoundException;
 
