@@ -62,4 +62,13 @@ Spring boot applications can be deployed with
 java -jar lombok-1.18.12.jar
 ```
 
-2. Eclipse Users follow the steps    
+3. Eclipse Users follow the steps    
+
+1. Download the jar from the website - https://projectlombok.org/download
+2. Run the jar ``java -jar lombok-1.18.12.jar``
+3. Select the installable
+4. Close the Eclipse IDE and open it again
+5. Clean all the Projects and rebuild the projects
+6. Refersh the project
+
+![Lombok installation](https://gitlab.com/classpath-spring-core/spring-boot-examples/-/blob/master/assets/lombok.png)
