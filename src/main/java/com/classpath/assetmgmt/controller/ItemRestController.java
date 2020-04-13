@@ -43,4 +43,10 @@ public class ItemRestController {
     public Item updateItem(long itemId, Item item){
         return this.itemService.updateItem(itemId, item);
     }
+
+
+    @DeleteMapping("/{itemId}")
+    public void deleteItem(long itemId){
+        this.itemService.deleteItemById(itemId);
+    }
 }
