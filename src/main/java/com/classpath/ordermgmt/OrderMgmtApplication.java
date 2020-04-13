@@ -1,11 +1,11 @@
-package com.classpath.assetmgmt;
+package com.classpath.ordermgmt;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AssetMgmtApplication {
+public class OrderMgmtApplication {
     public static void main(String[] args) {
-        SpringApplication.run(AssetMgmtApplication.class, args);
+        SpringApplication.run(OrderMgmtApplication.class, args);
     }
 }
