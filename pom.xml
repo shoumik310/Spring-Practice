@@ -11,7 +11,7 @@
     <groupId>com.classpath</groupId>
     <artifactId>order-mgmt</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>asset-mgmt</name>
+    <name>order-mgmt</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
