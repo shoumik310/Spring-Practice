@@ -218,7 +218,32 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findAll();
 }
 ```
+7. Controller
+```java
+@RestController
+@RequestMapping("/v1/orders")
+public class OrderRestController {
 
+    @Autowired
+    private OrderService orderService;
+
+    @PostMapping
+    public Order createOrder(@RequestBody Order order){
+        return this.orderService.createOrder(order);
+    }
+
+    @GetMapping
+    public Set<Order> fetchOrders(){
+        return this.orderService.fetchAllOrders();
+    }
+
+    @GetMapping("/{orderId}")
+    public Order getOrderByOrderId(@PathVariable long orderId) throws ResourceNotFoundException {
+        System.out.println("Inside the get Order by Order id "+orderId);
+        return this.orderService.findByOrderId(orderId);
+    }
+}
+```
 ## Testing the application
 
 ### POST request - http://localhost:8080/v1/orders/
