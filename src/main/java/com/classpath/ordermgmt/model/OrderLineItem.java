@@ -27,7 +27,7 @@ public class OrderLineItem {
     }
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "order_id", nullable = false)
+    @JoinColumn(name = "order_id", nullable = true)
     @JsonBackReference
     private Order order;
 
