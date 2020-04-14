@@ -25,6 +25,16 @@ public class OrderRestController {
         return this.orderService.fetchAllOrders();
     }
 
+    @PutMapping("/{orderId}")
+    public Order updateOrder(@PathVariable long orderId, @RequestBody Order updateOrder){
+        return this.orderService.updateOrder(orderId, updateOrder);
+    }
+
+    @DeleteMapping("/{orderId}")
+    public void deleteOrderById(@PathVariable long orderId){
+        this.orderService.deleteOrderById(orderId);
+    }
+
     @GetMapping("/{orderId}")
     public Order getOrderByOrderId(@PathVariable long orderId) throws ResourceNotFoundException {
         System.out.println("Inside the get Order by Order id "+orderId);

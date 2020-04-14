@@ -12,4 +12,8 @@ public interface OrderService {
     Set<Order> fetchAllOrders();
 
     Order findByOrderId(long orderId) throws ResourceNotFoundException;
+
+    Order updateOrder(long orderId, Order updateOrder);
+
+    void deleteOrderById(long orderId);
 }

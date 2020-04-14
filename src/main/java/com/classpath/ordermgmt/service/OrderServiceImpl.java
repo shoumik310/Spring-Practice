@@ -36,4 +36,21 @@ public class OrderServiceImpl implements OrderService {
                     .orElseThrow(()->new ResourceNotFoundException("Resource not found"));
 
     }
+
+    @Override
+    public Order updateOrder(long orderId, Order updateOrder) {
+        return this.orderRepository.findById(orderId).map(order -> {
+            order.setMerchantName(updateOrder.getMerchantName());
+            order.setOrderDate(updateOrder.getOrderDate());
+            return this.orderRepository.save(order);
+        }).orElseGet(() -> {
+            updateOrder.setOrderId(orderId);
+            return this.orderRepository.save(updateOrder);
+        });
+    }
+
+    @Override
+    public void deleteOrderById(long orderId) {
+        this.orderRepository.deleteById(orderId);
+    }
 }
