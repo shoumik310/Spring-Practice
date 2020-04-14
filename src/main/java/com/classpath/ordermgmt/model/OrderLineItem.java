@@ -16,7 +16,7 @@ import static javax.persistence.GenerationType.AUTO;
 @Getter
 @ToString(exclude = "order")
 @EqualsAndHashCode(exclude = "price")
-public class OrderLineItem {
+public class OrderLineItem extends AuditModel{
 
     @Id
     @GeneratedValue(strategy = AUTO)

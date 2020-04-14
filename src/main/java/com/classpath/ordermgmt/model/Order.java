@@ -21,7 +21,7 @@ import static javax.persistence.FetchType.*;
 @ToString
 @EqualsAndHashCode(of = "orderId")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Order{
+public class Order extends AuditModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
