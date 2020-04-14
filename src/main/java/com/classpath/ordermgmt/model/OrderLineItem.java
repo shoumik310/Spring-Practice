@@ -10,7 +10,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "order_line_item")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class OrderLineItem extends AuditModel {
+public class OrderLineItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,8 +18,8 @@ public class OrderLineItem extends AuditModel {
     private String name;
     private double price;
 
-    @ManyToOne()
-    @JoinColumn(name = "order_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name="order_id", nullable = false)
     @JsonIgnore
     private Order order;
 

@@ -25,7 +25,18 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Set<Order> fetchAllOrders() {
-        return new HashSet<>(this.orderRepository.findAll());
+        Order order = new Order();
+        order.setOrderId(12);
+        order.setPrice(2000);
+        OrderLineItem orderLineItem = new OrderLineItem();
+        orderLineItem.setName("shampoo");
+        orderLineItem.setPrice(45);
+        Set<OrderLineItem> orderLineItems = new HashSet<>();
+        orderLineItems.add(orderLineItem);
+        order.setOrderLineItems(orderLineItems);
+        Set<Order> orders = new HashSet<>();
+        orders.add(order);
+        return new HashSet<>(orders);
     }
 
     @Override

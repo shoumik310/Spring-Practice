@@ -1,6 +1,8 @@
 package com.classpath.ordermgmt.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
@@ -12,11 +14,12 @@ import static javax.persistence.FetchType.*;
 @Entity
 @Table(name = "orders")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Order extends AuditModel {
+public class Order{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "order_id")
+    @JsonProperty("order_id")
     private long orderId;
 
     private double price;
@@ -24,7 +27,9 @@ public class Order extends AuditModel {
     @OneToMany(mappedBy = "order",
             fetch = EAGER,
             cascade = CascadeType.ALL )
-    private Set<OrderLineItem> orderLineItems = new HashSet<>();
+    @JsonProperty("order_line_items")
+    @Column(name = "line_items")
+    private Set<OrderLineItem> orderLineItems;
 
     public long getOrderId() {
         return orderId;
