@@ -1,5 +1,6 @@
 package com.classpath.ordermgmt.controller;
 
+import com.classpath.ordermgmt.exception.ResourceNotFoundException;
 import com.classpath.ordermgmt.model.Order;
 import com.classpath.ordermgmt.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class OrderRestController {
     }
 
     @GetMapping("/{orderId}")
-    public Order getOrderByOrderId(@PathVariable long orderId){
+    public Order getOrderByOrderId(@PathVariable long orderId) throws ResourceNotFoundException {
         System.out.println("Inside the get Order by Order id "+orderId);
         return this.orderService.findByOrderId(orderId);
     }

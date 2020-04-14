@@ -1,18 +1,13 @@
 package com.classpath.ordermgmt.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
 import javax.persistence.*;
-
-import java.util.Objects;
-
-import static javax.persistence.GenerationType.*;
+import static javax.persistence.GenerationType.AUTO;
 
 @Entity
 @Table(name = "order_line_item")
@@ -35,7 +30,7 @@ public class OrderLineItem {
     @JsonIgnore
     private Order order;
 
-    //default constructor
+    //default constructor used for serialization and deseriazation
     OrderLineItem(){}
 
     public OrderLineItem(String name, double price){
