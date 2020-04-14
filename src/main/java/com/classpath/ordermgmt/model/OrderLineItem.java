@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+
 import static javax.persistence.GenerationType.AUTO;
 
 @Entity
@@ -21,6 +23,8 @@ public class OrderLineItem extends AuditModel{
     @Id
     @GeneratedValue(strategy = AUTO)
     private long id;
+
+    @NotEmpty(message = "name must not be empty")
     private String name;
     private double price;
     private int quantity;

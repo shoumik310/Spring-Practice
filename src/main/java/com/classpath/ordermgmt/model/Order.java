@@ -1,7 +1,6 @@
 package com.classpath.ordermgmt.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
@@ -9,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.util.Set;
 import static javax.persistence.CascadeType.*;
@@ -36,6 +36,7 @@ public class Order extends AuditModel{
 
     @Column(name="merchant_name")
     @JsonProperty("merchant_name")
+    @NotEmpty(message = "name must not be empty")
     private String merchantName;
 
     @OneToMany(mappedBy = "order",

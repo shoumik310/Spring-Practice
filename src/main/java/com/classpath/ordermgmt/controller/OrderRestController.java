@@ -6,6 +6,7 @@ import com.classpath.ordermgmt.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Set;
 
 @RestController
@@ -16,7 +17,7 @@ public class OrderRestController {
     private OrderService orderService;
 
     @PostMapping
-    public Order createOrder(@RequestBody Order order){
+    public Order createOrder(@Valid @RequestBody Order order){
         return this.orderService.createOrder(order);
     }
 
@@ -26,7 +27,7 @@ public class OrderRestController {
     }
 
     @PutMapping("/{orderId}")
-    public Order updateOrder(@PathVariable long orderId, @RequestBody Order updateOrder){
+    public Order updateOrder(@PathVariable long orderId, @Valid @RequestBody Order updateOrder){
         return this.orderService.updateOrder(orderId, updateOrder);
     }
 
