@@ -24,11 +24,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Set<Order> fetchAllOrders() {
-        Order order = new Order();
-        order.setPrice(34.0);
-        Set<Order> orders = new HashSet<>();
-        order.addOrderLineItem(new OrderLineItem("mouse", 4000));
-        orders.add(order);
-        return orders;
+        return new HashSet<>(this.orderRepository.findAll());
     }
 }
