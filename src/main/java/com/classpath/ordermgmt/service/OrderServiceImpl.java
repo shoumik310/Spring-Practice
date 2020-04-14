@@ -34,7 +34,6 @@ public class OrderServiceImpl implements OrderService {
         return this.orderRepository
                     .findById(orderId)
                     .orElseThrow(()->new ResourceNotFoundException("Resource not found"));
-
     }
 
     @Override

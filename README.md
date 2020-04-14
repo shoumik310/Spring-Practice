@@ -315,3 +315,15 @@ public class OrderRestController {
     ]
 }
 ```
+
+### Update Order - http://localhost:8080/v1/orders/1
+
+```json
+{
+    "order_date": "25-05-20",
+    "merchant_name":"Kalyan"
+}
+```
+
+### Delete Order - http://localhost:8080/v1/orders/1
+
