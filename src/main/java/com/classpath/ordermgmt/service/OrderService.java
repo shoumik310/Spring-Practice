@@ -9,4 +9,6 @@ public interface OrderService {
     Order createOrder(Order order);
 
     Set<Order> fetchAllOrders();
+
+    Order findByOrderId(long orderId);
 }

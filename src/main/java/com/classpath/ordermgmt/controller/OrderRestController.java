@@ -23,4 +23,10 @@ public class OrderRestController {
     public Set<Order> fetchOrders(){
         return this.orderService.fetchAllOrders();
     }
+
+    @GetMapping("/{orderId}")
+    public Order getOrderByOrderId(@PathVariable long orderId){
+        System.out.println("Inside the get Order by Order id "+orderId);
+        return this.orderService.findByOrderId(orderId);
+    }
 }

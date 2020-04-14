@@ -19,6 +19,7 @@ public class OrderServiceImpl implements OrderService {
     public Order createOrder(Order order) {
         System.out.println("Inside the save method of Order service .... :: ");
         System.out.println(order);
+
         return this.orderRepository.save(order);
     }
 
@@ -26,4 +27,14 @@ public class OrderServiceImpl implements OrderService {
     public Set<Order> fetchAllOrders() {
         return new HashSet<>(this.orderRepository.findAll());
     }
+
+    @Override
+    public Order findByOrderId(long orderId) {
+        return this.orderRepository
+                    .findById(orderId)
+                    .orElseGet(()-> new Order());
+
+    }
+
+
 }
