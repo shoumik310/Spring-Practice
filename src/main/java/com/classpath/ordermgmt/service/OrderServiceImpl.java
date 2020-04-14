@@ -19,24 +19,16 @@ public class OrderServiceImpl implements OrderService {
     public Order createOrder(Order order) {
         System.out.println("Inside the save method of Order service .... :: ");
         System.out.println(order);
+        for(OrderLineItem orderLineItem: order.getOrderLineItems()) {
+            orderLineItem.setOrder(order);
+        }
 
         return this.orderRepository.save(order);
     }
 
     @Override
     public Set<Order> fetchAllOrders() {
-        Order order = new Order();
-        order.setOrderId(12);
-        order.setPrice(2000);
-        OrderLineItem orderLineItem = new OrderLineItem();
-        orderLineItem.setName("shampoo");
-        orderLineItem.setPrice(45);
-        Set<OrderLineItem> orderLineItems = new HashSet<>();
-        orderLineItems.add(orderLineItem);
-        order.setOrderLineItems(orderLineItems);
-        Set<Order> orders = new HashSet<>();
-        orders.add(order);
-        return new HashSet<>(orders);
+        return new HashSet<>(this.orderRepository.findAll());
     }
 
     @Override
