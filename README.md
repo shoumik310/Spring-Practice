@@ -182,3 +182,39 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 ```
+### Setting up Authorization
+1. Override the `configure(HttpSecurity httpSecurity)` method
+
+```java
+@Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception {...}
+```
+2. Setup the Authorization rules
+```java
+    @Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+        // configure authorization rules here
+        httpSecurity.cors().disable();
+        httpSecurity.csrf().disable();
+        httpSecurity
+                .authorizeRequests()
+                .antMatchers(GET,"/v1/orders/**")
+                .hasAnyRole("USER", "ADMIN")
+                .and()
+                .authorizeRequests()
+                .antMatchers(POST,"/v1/orders/**")
+                .hasRole("ADMIN")
+                .antMatchers(PUT,"/v1/orders/**")
+                .hasRole("ADMIN")
+                .antMatchers(DELETE,"/v1/orders/**")
+                .hasRole("ADMIN")
+                .anyRequest()
+                .authenticated()
+                .and()
+                .formLogin()
+                .and()
+                .httpBasic();
+    }
+
+```
+
