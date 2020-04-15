@@ -8,7 +8,9 @@ public class BcryptPasswordGenerator {
         String encryptedUserPassword = passwordEncoder.encode("user");
         String encryptedAdminPassword = passwordEncoder.encode("adminuser");
 
-        System.out.printf("Encrypted user password is : %S %n", encryptedUserPassword );
-        System.out.printf("Encrypted admin password is : %S %n", encryptedAdminPassword );
+        System.out.println(encryptedUserPassword );
+        System.out.println(encryptedAdminPassword );
+
+        System.out.println(passwordEncoder.matches("adminuser", encryptedAdminPassword));
     }
 }

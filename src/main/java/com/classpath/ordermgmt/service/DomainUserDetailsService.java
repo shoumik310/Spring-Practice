@@ -24,7 +24,6 @@ public class DomainUserDetailsService implements UserDetailsService {
         User user = this.userRepository.findByUsername(username).orElseThrow(()-> new UsernameNotFoundException("Invalid User"));
         System.out.println("User from the repository ");
         System.out.println(user);
-        user.setPassword(new BCryptPasswordEncoder().encode("adminuser"));
         //convert into UserDetails object which Spring Security can understand
         return new DomainUserDetails(user);
     }
