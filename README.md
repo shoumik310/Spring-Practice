@@ -217,7 +217,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 ```
 
-## DAOuthentication using SpringSecurity
+## Configuring DAOAuthentication using SpringSecurity
 
 Steps for DAO Authentication
 1. Create User DTO class
