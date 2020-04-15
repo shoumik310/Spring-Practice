@@ -123,3 +123,31 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 }
 ```
+
+## Configuring InMemory Authentication
+1. Comment the user and password defined in `application.properties` file
+2. Create a Bean for password encoding
+```java
+  @Bean
+    public PasswordEncoder passwordEncoder(){
+        return NoOpPasswordEncoder.getInstance();
+    }
+```
+3. Override `configure(AuthenticationManagerBuilder authManagerBuilder)` method in the `SecurityConfiguration` class
+
+```java
+  @Override
+    protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+        //configure users
+        authenticationManagerBuilder
+                .inMemoryAuthentication()
+                .withUser("kiran")
+                .password(passwordEncoder().encode("user"))
+                .roles("USER")
+                .and()
+                .withUser("vinay")
+                .password(passwordEncoder().encode("adminuser"))
+                .roles("USER","ADMIN");
+    }
+}
+```
