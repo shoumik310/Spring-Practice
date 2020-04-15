@@ -91,4 +91,12 @@ Spring Security deals with
     </dependency>
 ```
 
-2. Annotate the main class with `EnableWebSecurity`
+2. Annotate the main class with `@EnableWebSecurity`
+
+3. Default username will be `user` and password will be printed in the console
+
+4. Create user and password explicitly inside `application.properties` file
+```properties
+spring.security.user.name=laxman
+spring.security.user.password=welcome
+```
