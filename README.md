@@ -215,6 +215,97 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .httpBasic();
     }
+```
 
+## DAOuthentication using SpringSecurity
+
+Steps for DAO Authentication
+1. Create User DTO class
+```java
+package com.classpath.ordermgmt.model;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import javax.persistence.*;
+import java.util.Set;
+
+@Entity
+@Setter
+@Getter
+@ToString
+@EqualsAndHashCode(of = "userId")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="user_id")
+    private long userId;
+
+    private String username;
+
+    private String password;
+
+    private String emailAddress;
+
+    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    private Set<Role> roles;
+
+}
+```
+
+2. Create Role DTO class
+
+```java
+@Entity
+@Setter
+@Getter
+@ToString(exclude = "users")
+@EqualsAndHashCode(of = "roleId")
+public class Role {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="role_id")
+    private int roleId;
+
+    @Column(name="role_name")
+    private String roleName;
+
+    @ManyToMany
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name="role_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<User> users;
+}
+```
+
+3. Create `UserRepository` and `RoleRepository` interfaces
+
+```java
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> { ... }
+
+
+@Repository
+public interface RoleRepository extends JpaRepository<Role, Integer> { ... }
+```
+
+4. Create `data.sql` and insert the data
+```sql
+
+insert into user (user_id, email_address, password, username) values (1, 'kiran@gmail.com', '$2A$10$EYQ2LNWTBRKXDJG7CPFOX.KUW4I3QIJEU.ZHME3CAIWCK1U0UHIRM', 'kiran');
+insert into user (user_id, email_address, password, username) values (2, 'vinay@gmail.com', '$2A$10$TN.AT/ISGMOASVWTK0SMOUEGMSEBUKLAJHHD2/GOVJYXV.6NY3KRQ', 'vinay');
+
+insert into role (role_id, role_name) values (1, 'ROLE_USER');
+insert into role (role_id, role_name) values (2, 'ROLE_ADMIN');
+
+insert into user_roles(role_id, user_id) values (1, 1),(2, 1), (2,2);
+```
+
+5. Configure Spring to initialize the data 
+```properties
+spring.datasource.initialization-mode=always
 ```
 
