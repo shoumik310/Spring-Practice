@@ -25,6 +25,7 @@ Spring Boot comes with various starter dependencies
 3. jdbc - ``spring-boot-starter-jdbc``
 4. jpa - ``spring-boot-starter-jpa``
 5. mongodb - ``spring-boot-starter-mongodb`` 
+6. security - ``spring-boot-starter-security``
 
 [Complete List of Starter Dependencies](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-starter)
 
