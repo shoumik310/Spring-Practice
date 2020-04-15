@@ -151,3 +151,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 }
 ```
+
+4. Encrypt the password and use the `BcryptPasswordEncoder` 
+
+```java
+    @Override
+    protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+        //configure users
+        authenticationManagerBuilder
+                .inMemoryAuthentication()
+                .withUser("kiran")
+                .password(bcryptPasswordEncoder().encode("user"))
+                .roles("USER")
+                .and()
+                .withUser("vinay")
+                .password(bcryptPasswordEncoder().encode("adminuser"))
+                .roles("USER","ADMIN")
+                .and()
+                .passwordEncoder(bcryptPasswordEncoder());
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return NoOpPasswordEncoder.getInstance();
+    }
+```
