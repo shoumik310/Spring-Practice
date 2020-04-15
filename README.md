@@ -292,7 +292,7 @@ public interface UserRepository extends JpaRepository<User, Long> { ... }
 public interface RoleRepository extends JpaRepository<Role, Integer> { ... }
 ```
 
-4. Create `data.sql` and insert the data
+4. Create `data.sql` inside `src/main/resources` directory and insert the data
 ```sql
 
 insert into user (user_id, email_address, password, username) values (1, 'kiran@gmail.com', '$2A$10$EYQ2LNWTBRKXDJG7CPFOX.KUW4I3QIJEU.ZHME3CAIWCK1U0UHIRM', 'kiran');
