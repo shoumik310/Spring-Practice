@@ -100,3 +100,26 @@ Spring Security deals with
 spring.security.user.name=laxman
 spring.security.user.password=welcome
 ```
+
+5. To create users and roles, customize the Spring Security by extending through extension points
+
+6. Create a `SecurityConfiguration` class, annotate with `@Configuration` and extend `WebSecurityConfigurerAdaptor`
+
+```java
+@Configuration
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+    ...
+}
+```    
+7. Override the `configure(HttpSecurity httpSecurity)` method
+
+```java
+@Configuration
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        super.configure(http);
+    }
+}
+```
