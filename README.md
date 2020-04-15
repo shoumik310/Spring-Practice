@@ -75,8 +75,14 @@ java -jar lombok-1.18.12.jar
 ![Lombok installation](https://gitlab.com/classpath-spring-core/spring-boot-examples/-/blob/master/assets/lombok.png)
 
 
-## Spring Security
 
+## Spring Security
+Spring Security deals with
+1. Authentication - Are you really the same person, whom you claim to be?
+2. Authorization - Do you have privilivges to perform the action?
+
+## Steps to Integrate Spring Security
+    
 1. Add the `spring-security-starter` dependency
 ```xml
    <dependency>
@@ -85,4 +91,4 @@ java -jar lombok-1.18.12.jar
     </dependency>
 ```
 
-
+2. Annotate the main class with `EnableWebSecurity`
