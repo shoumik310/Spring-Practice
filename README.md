@@ -75,8 +75,14 @@ java -jar lombok-1.18.12.jar
 ![Lombok installation](https://gitlab.com/classpath-spring-core/spring-boot-examples/-/blob/master/assets/lombok.png)
 
 
-## Spring Security
 
+## Spring Security
+Spring Security deals with
+1. Authentication - Are you really the same person, whom you claim to be?
+2. Authorization - Do you have privilivges to perform the action?
+
+## Steps to Integrate Spring Security
+    
 1. Add the `spring-security-starter` dependency
 ```xml
    <dependency>
@@ -85,4 +91,35 @@ java -jar lombok-1.18.12.jar
     </dependency>
 ```
 
+2. Annotate the main class with `@EnableWebSecurity`
 
+3. Default username will be `user` and password will be printed in the console
+
+4. Create user and password explicitly inside `application.properties` file
+```properties
+spring.security.user.name=laxman
+spring.security.user.password=welcome
+```
+
+5. To create users and roles, customize the Spring Security by extending through extension points
+
+6. Create a `SecurityConfiguration` class, annotate with `@Configuration` and extend `WebSecurityConfigurerAdaptor`
+
+```java
+@Configuration
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+    ...
+}
+```    
+7. Override the `configure(HttpSecurity httpSecurity)` method
+
+```java
+@Configuration
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        super.configure(http);
+    }
+}
+```
