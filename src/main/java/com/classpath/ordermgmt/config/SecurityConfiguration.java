@@ -1,5 +1,7 @@
 package com.classpath.ordermgmt.config;
 
+import com.classpath.ordermgmt.service.DomainUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -7,6 +9,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +18,10 @@ import static org.springframework.http.HttpMethod.*;
 
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private DomainUserDetailsService userDetailsService;
+
     // setup users and permissions
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -45,15 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         //configure users
         authenticationManagerBuilder
-                .inMemoryAuthentication()
-                .withUser("kiran")
-                .password(bcryptPasswordEncoder().encode("user"))
-                .roles("USER")
-                .and()
-                .withUser("vinay")
-                .password(bcryptPasswordEncoder().encode("adminuser"))
-                .roles("USER","ADMIN")
-                .and()
+                .userDetailsService(this.userDetailsService)
                 .passwordEncoder(bcryptPasswordEncoder());
     }
 

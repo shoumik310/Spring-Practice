@@ -1,6 +1,6 @@
 
-insert into user (user_id, email_address, password, username) values (1, 'kiran@gmail.com', '$2A$10$EYQ2LNWTBRKXDJG7CPFOX.KUW4I3QIJEU.ZHME3CAIWCK1U0UHIRM', 'kiran');
-insert into user (user_id, email_address, password, username) values (2, 'vinay@gmail.com', '$2A$10$TN.AT/ISGMOASVWTK0SMOUEGMSEBUKLAJHHD2/GOVJYXV.6NY3KRQ', 'vinay');
+insert into user (user_id, email_address, password, username) values (1, 'kiran@gmail.com', '$2A$10$B/KL8DZYRME3AUJQ/DFXWOL3EDFZRKIOKDNMMUQUQU4R4I0CQ/XP2', 'kiran');
+insert into user (user_id, email_address, password, username) values (2, 'vinay@gmail.com', '$2A$10$SS2SCLX4CLEWZHQGPCZ4HOG01JIUI7MZRBIAKSYL1VGQDWO6ZKRYE', 'vinay');
 
 insert into role (role_id, role_name) values (1, 'ROLE_USER');
 insert into role (role_id, role_name) values (2, 'ROLE_ADMIN');

@@ -8,6 +8,8 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.util.Set;
 
+import static javax.persistence.CascadeType.*;
+
 @Entity
 @Setter
 @Getter
@@ -25,7 +27,8 @@ public class User {
 
     private String emailAddress;
 
-    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "users",
+            cascade = ALL, fetch = FetchType.EAGER)
     private Set<Role> roles;
 
 }
