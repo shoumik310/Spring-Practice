@@ -76,3 +76,13 @@ java -jar lombok-1.18.12.jar
 
 
 ## Spring Security
+
+1. Add the `spring-security-starter` dependency
+```xml
+   <dependency>
+     <groupId>org.springframework.boot</groupId>
+     <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+```
+
+
