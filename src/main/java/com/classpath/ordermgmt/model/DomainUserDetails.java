@@ -19,14 +19,12 @@ public class DomainUserDetails implements UserDetails {
         this.password = user.getPassword();
         this.authorities = user.getRoles()
                 .stream()
-                .map(role -> new SimpleGrantedAuthority(role.getRoleName()))
+                .map(DomainUserDetails::roleToAuthority)
                 .collect(Collectors.toList());
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        System.out.println("Printing the authorities :: ");
-        System.out.println(this.authorities);
         return this.authorities;
     }
 
@@ -58,5 +56,9 @@ public class DomainUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    private static SimpleGrantedAuthority roleToAuthority(Role role) {
+        return new SimpleGrantedAuthority(role.getRoleName());
     }
 }
