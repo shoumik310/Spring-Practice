@@ -42,15 +42,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin()
+               .formLogin()
                 .and()
                 .httpBasic()
-                .and()
                 /*
                    Set the sessioncreation policy to avoid using cookies for authentication
                    https://stackoverflow.com/questions/50842258/spring-security-caching-my-authentication/50847571
                  */
-                .sessionManagement().sessionCreationPolicy(STATELESS);
+               .and().sessionManagement().sessionCreationPolicy(STATELESS);
     }
 
     @Override
