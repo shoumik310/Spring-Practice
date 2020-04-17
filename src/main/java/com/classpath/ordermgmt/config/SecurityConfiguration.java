@@ -25,24 +25,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         // configure authorization rules here
-        httpSecurity.cors().disable();
+        httpSecurity.cors();
         httpSecurity.csrf().disable();
         httpSecurity
                 .authorizeRequests()
-                .antMatchers(GET,"/v1/orders/**")
-                .hasAnyRole("USER", "ADMIN")
+                .antMatchers("/api/v1/orders/**")
+                .permitAll()
                 .and()
-                .authorizeRequests()
-                .antMatchers(POST,"/v1/orders/**")
-                .hasRole("ADMIN")
-                .antMatchers(PUT,"/v1/orders/**")
-                .hasRole("ADMIN")
-                .antMatchers(DELETE,"/v1/orders/**")
-                .hasRole("ADMIN")
-                .anyRequest()
-                .authenticated()
-                .and()
-               .formLogin()
+                .formLogin()
                 .and()
                 .httpBasic()
                 /*
