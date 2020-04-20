@@ -288,15 +288,12 @@ public class Role {
 }
 ```
 
-3. Create `UserRepository` and `RoleRepository` interfaces
+3. Create `UserRepository` interface
 
 ```java
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> { ... }
 
-
-@Repository
-public interface RoleRepository extends JpaRepository<Role, Integer> { ... }
 ```
 
 4. Create `data.sql` inside `src/main/resources` directory and insert the data
