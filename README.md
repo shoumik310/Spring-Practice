@@ -235,7 +235,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
+import static javax.persistence.FetchType;
 import javax.persistence.*;
 import java.util.Set;
 
@@ -256,7 +256,7 @@ public class User {
 
     private String emailAddress;
 
-    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     private Set<Role> roles;
 
 }
@@ -307,7 +307,7 @@ insert into user (user_id, email_address, password, username) values (2, 'vinay@
 insert into role (role_id, role_name) values (1, 'ROLE_USER');
 insert into role (role_id, role_name) values (2, 'ROLE_ADMIN');
 
-insert into user_roles(role_id, user_id) values (1, 1),(2, 1), (2,2);
+insert into user_roles(user_id, role_id) values (1, 1),(2, 1), (2,2);
 ```
 
 5. Configure Spring to initialize the data 
