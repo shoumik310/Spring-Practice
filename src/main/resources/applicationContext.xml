@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="userBean" name="user"
+		class="com.spring.demo.core.ioc.User">
+		<property name="firstName" value="Rahul"></property>
+		<property name="lastName" value="Anand"></property>
+		<property name="email" value="rahulanand@gmail.com"></property>
+	</bean>
+
+	<bean id="userPrototype" class="com.spring.demo.core.ioc.User"
+		scope="prototype">
+		<property name="firstName" value="Shoumik"></property>
+		<property name="lastName" value="Panandikar"></property>
+		<property name="email" value="srp@gmail.com"></property>
+	</bean>
+
+	<!-- Dependency Injection Beans -->
+
+	<bean id="adminRole" class="com.spring.demo.core.di.Role">
+		<property name="roleName" value="ADMIN_USER" />
+	</bean>
+
+	<!-- Constructor Injection -->
+	<bean id="adminUser" class="com.spring.demo.core.di.User">
+		<constructor-arg name="role" ref="adminRole" />
+	</bean>
+	<bean id="adminUser2" class="com.spring.demo.core.di.User">
+		<constructor-arg index="0" ref="adminRole" />
+	</bean>
+	<bean id="adminUser3" class="com.spring.demo.core.di.User">
+		<constructor-arg type="Role" ref="adminRole" />
+	</bean>
+
+	<!-- Setter Injection -->
+	<bean id="adminUser4" class="com.spring.demo.core.di.User">
+		<property name="role" ref="adminRole"></property>
+	</bean>
+
+</beans>
