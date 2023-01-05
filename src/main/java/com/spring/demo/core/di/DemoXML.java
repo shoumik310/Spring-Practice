@@ -19,5 +19,16 @@ public class DemoXML {
 		User adminUser4 = context.getBean("adminUser4", User.class);
 		System.out.println(adminUser4.getRole().getRoleName());
 		
+		System.out.println("========== AUTOWIRE BY TYPE DEMO ==========");
+		User adminUser5 = context.getBean("adminUser5", User.class);
+		System.out.println(adminUser5.getRole().getRoleName());
+		
+		System.out.println("========== COLLECTIONS INJECTION DEMO ==========");
+		JavaCollectionInjection jc = (JavaCollectionInjection) context.getBean("javaCollection", JavaCollectionInjection.class);
+
+		jc.getAddressList();
+		jc.getAddressSet();
+		jc.getAddressMap();
+		jc.getAddressProperties();
 	}
 }
