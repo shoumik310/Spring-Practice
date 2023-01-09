@@ -18,7 +18,9 @@ public class ApplicationConfiguration implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		String[] beanNames = this.applicationContext.getBeanDefinitionNames();
-		Stream.of(beanNames).forEach(System.out::println);
+		Stream.of(beanNames)
+		.filter(beanName -> beanName.startsWith("user"))
+		.forEach(System.out::println);
 	}
 
 }
