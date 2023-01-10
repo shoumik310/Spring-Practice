@@ -31,7 +31,7 @@ public class BootstrapAppData {
 		System.out.println("Application is ready :: ");
 		//Order order = new Order(1, "Arun", "Sagar", false, true, true, 21, 33);
 		IntStream
-			.range(0, 10)
+			.range(0, orderCount)
 			.forEach(index -> {
 				String firstName = faker.name().firstName();
 				Order order = Order.builder()

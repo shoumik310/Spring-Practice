@@ -24,6 +24,7 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @ToString(exclude = "order")
+@EqualsAndHashCode(exclude = "order")
 public class LineItem {
 
 	@Id

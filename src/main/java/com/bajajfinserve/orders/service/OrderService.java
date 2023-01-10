@@ -1,9 +1,13 @@
 package com.bajajfinserve.orders.service;
 
 import java.util.HashSet;
-import java.util.Optional;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.bajajfinserve.orders.dao.OrderJpaRepository;
@@ -21,10 +25,27 @@ public class OrderService {
 		return this.orderRepository.save(order);
 	}
 
-	public Set<Order> fetchAll() {
+	public Map<String, Object> fetchAll(int page, int size, String strDirection, String property) {
 		// if you are using Java 11
 		// return Set.copyOf(orderRepository.findAll());
-		return new HashSet<Order>(orderRepository.findAll());
+
+		Sort.Direction direction = strDirection.equalsIgnoreCase("asc") ? Sort.Direction.ASC: Sort.Direction.DESC;
+		PageRequest pageRequest = PageRequest.of(page, size, direction, property);
+		
+		Page<Order> pageResponse = this.orderRepository.findAll(pageRequest);
+		
+		long totalRecords = pageResponse.getTotalElements();
+		int pages = pageResponse.getTotalPages();
+		Set<Order> data = pageResponse.toSet();
+		
+		
+		Map<String, Object> responseMap = new LinkedHashMap<>();
+		
+		responseMap.put("total-records", totalRecords);
+		responseMap.put("pages", pages);
+		responseMap.put("content", data);
+		
+		return responseMap;
 	}
 
 	public Order findById(long orderId) {
