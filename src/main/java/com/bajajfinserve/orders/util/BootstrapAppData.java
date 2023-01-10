@@ -4,11 +4,13 @@ import java.time.ZoneId;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import com.bajajfinserve.orders.dao.OrderJpaRepository;
+import com.bajajfinserve.orders.model.LineItem;
 import com.bajajfinserve.orders.model.Order;
 import com.github.javafaker.Faker;
 
@@ -20,6 +22,9 @@ public class BootstrapAppData {
 	
 	private final OrderJpaRepository orderRepository;
 	private final Faker faker = new Faker();
+	
+	@Value("${app.orderCount}")
+	private int orderCount;
 	
 	@EventListener(ApplicationReadyEvent.class)
 	public void onApplicationStartup(ApplicationReadyEvent event) {
@@ -34,6 +39,18 @@ public class BootstrapAppData {
 									.email(firstName+"@"+faker.internet().domainName())
 									.dob(faker.date().past(4, TimeUnit.DAYS).toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
 									.build();
+				
+				IntStream.range(0, 3).forEach(val -> {
+					
+					LineItem lineItem = LineItem.builder()
+												.name(faker.commerce().productName())
+												.qty(faker.number().numberBetween(2, 4))
+												.price(faker.number().randomDouble(2, 400, 600))
+												.build();
+					
+					
+				});
+				
 				this.orderRepository.save(order);
 			});
 		
