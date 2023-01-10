@@ -33,10 +33,12 @@ public class Order {
 	private String name;
 	private String email;
 	private LocalDate dob;
+	private double price;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<LineItem> lineItems;
 	
+	//scaffolding code
 	public void addLineItem(LineItem lineItem) {
 		if(this.lineItems == null) {
 			this.lineItems = new ArrayList<LineItem>();

@@ -47,10 +47,18 @@ public class BootstrapAppData {
 												.qty(faker.number().numberBetween(2, 4))
 												.price(faker.number().randomDouble(2, 400, 600))
 												.build();
-					
-					
+					order.addLineItem(lineItem);
 				});
 				
+				double totalOrderPrice = order
+											.getLineItems()
+											.stream()
+											// input - > list of lineItem [lineItem1, lineItem2, lineItem3]
+											// output -> list of price [400, 600, 899]
+											.map(lineItem -> lineItem.getQty() * lineItem.getPrice())
+											.reduce(Double::sum)
+											.orElse(0d);
+				order.setPrice(totalOrderPrice);	
 				this.orderRepository.save(order);
 			});
 		
