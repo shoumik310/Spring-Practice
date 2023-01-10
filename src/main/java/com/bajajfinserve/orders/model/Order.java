@@ -37,7 +37,7 @@ public class Order {
 	private LocalDate dob;
 	private double price;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "order", cascade =  CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonManagedReference
 	private List<LineItem> lineItems;
 	
