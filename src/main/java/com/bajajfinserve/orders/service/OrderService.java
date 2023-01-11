@@ -1,7 +1,6 @@
 package com.bajajfinserve.orders.service;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -11,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.bajajfinserve.orders.dao.OrderJpaRepository;
+import com.bajajfinserve.orders.dto.OrderDto;
 import com.bajajfinserve.orders.model.Order;
 
 import lombok.RequiredArgsConstructor;
@@ -66,11 +66,11 @@ public class OrderService {
 	public Map<String, Object> findOrdersByPriceRange(int page, int size, double minPrice, double maxPrice) {
 		PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.ASC, "price");
 
-		Page<Order> pageResponse = this.orderRepository.findByPriceBetween(minPrice, maxPrice, pageRequest);
+		Page<OrderDto> pageResponse = this.orderRepository.findByPriceBetween(minPrice, maxPrice, pageRequest);
 
 		long totalRecords = pageResponse.getTotalElements();
 		int pages = pageResponse.getTotalPages();
-		Set<Order> data = pageResponse.toSet();
+		Set<OrderDto> data = pageResponse.toSet();
 
 		Map<String, Object> responseMap = new LinkedHashMap<>();
 

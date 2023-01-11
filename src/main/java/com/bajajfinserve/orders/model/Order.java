@@ -34,7 +34,7 @@ public class Order {
 	private Long id;
 	private String name;
 	private String email;
-	private LocalDate dob;
+	private LocalDate orderDate;
 	private double price;
 	
 	@OneToMany(mappedBy = "order", cascade =  CascadeType.ALL, fetch = FetchType.EAGER)

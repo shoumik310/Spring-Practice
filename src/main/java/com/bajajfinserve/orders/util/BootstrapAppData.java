@@ -37,7 +37,7 @@ public class BootstrapAppData {
 				Order order = Order.builder()
 									.name(firstName)
 									.email(firstName+"@"+faker.internet().domainName())
-									.dob(faker.date().past(4, TimeUnit.DAYS).toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
+									.orderDate(faker.date().past(4, TimeUnit.DAYS).toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
 									.build();
 				
 				IntStream.range(0, 3).forEach(val -> {
