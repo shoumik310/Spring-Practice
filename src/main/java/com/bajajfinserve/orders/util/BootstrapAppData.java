@@ -38,6 +38,7 @@ public class BootstrapAppData {
 									.name(firstName)
 									.email(firstName+"@"+faker.internet().domainName())
 									.orderDate(faker.date().past(4, TimeUnit.DAYS).toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
+									.creditCardNumber(faker.business().creditCardNumber())
 									.build();
 				
 				IntStream.range(0, 3).forEach(val -> {

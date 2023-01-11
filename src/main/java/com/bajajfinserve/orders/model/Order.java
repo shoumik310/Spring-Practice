@@ -18,6 +18,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.PastOrPresent;
 
+import com.bajajfinserve.orders.constraints.CreditCard;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -45,6 +46,9 @@ public class Order {
 	
 	@PastOrPresent(message = "order date cannot be in future")
 	private LocalDate orderDate;
+	
+	@CreditCard(message="credit card should be of 16 digit")
+	private String creditCardNumber;
 	
 	@Min(value = 500, message = "min order price should be 500")
 	@Max(value = 10000, message = "max order price cannot be more than 4000")

@@ -1,6 +1,11 @@
 package com.bajajfinserve.orders.exception;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -12,6 +17,18 @@ public class GlobalExceptionHandler {
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public Error handleInvalidOrderId(IllegalArgumentException illegalArgumentException) {
 		return new Error (100, illegalArgumentException.getMessage());
+	}
+	
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public Set<Error> handleInvalidRequest(MethodArgumentNotValidException exception){
+		System.out.println("Invalid data passed");
+		return exception
+					.getAllErrors()
+					.stream()
+					.map(ObjectError::getDefaultMessage)
+					.map(message -> new Error(100, message))
+					.collect(Collectors.toSet());
 	}
 }
 
