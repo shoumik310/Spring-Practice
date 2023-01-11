@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.jboss.logging.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -14,21 +15,20 @@ import com.bajajfinserve.orders.dto.OrderDto;
 import com.bajajfinserve.orders.model.Order;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class OrderService {
-
 	private final OrderJpaRepository orderRepository;
-
 	public Order save(Order order) {
+		log.info(null);
 		return this.orderRepository.save(order);
 	}
-
 	public Map<String, Object> fetchAll(int page, int size, String strDirection, String property) {
 		// if you are using Java 11
 		// return Set.copyOf(orderRepository.findAll());
-
 		Sort.Direction direction = strDirection.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
 		PageRequest pageRequest = PageRequest.of(page, size, direction, property);
 
@@ -43,6 +43,7 @@ public class OrderService {
 		responseMap.put("total-records", totalRecords);
 		responseMap.put("pages", pages);
 		responseMap.put("content", data);
+		
 
 		return responseMap;
 	}
@@ -77,8 +78,6 @@ public class OrderService {
 		responseMap.put("total-records", totalRecords);
 		responseMap.put("pages", pages);
 		responseMap.put("content", data);
-
 		return responseMap;
 	}
-
 }

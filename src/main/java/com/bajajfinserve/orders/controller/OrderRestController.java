@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.bajajfinserve.orders.model.Order;
 import com.bajajfinserve.orders.service.OrderService;
@@ -26,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 public class OrderRestController {
 
 	private final OrderService orderService;
+	private final WebClient webClient;
 
 	@GetMapping
 	public Map<String, Object> fetchOrders(@RequestParam(name = "page", defaultValue = "0", required = false) int page,
@@ -59,5 +61,15 @@ public class OrderRestController {
 			@RequestParam(name = "min", defaultValue = "400", required = false) double min,
 			@RequestParam(name = "max", defaultValue = "2000", required = false) double max) {
 		return this.orderService.findOrdersByPriceRange(page, size, min, max);
+	}
+	
+	@GetMapping("/users")
+	public String fetchAllUsers() {
+		String response = this.webClient
+								.get()
+								.uri("/users")
+								.exchangeToMono((res) -> res.bodyToMono(String.class))
+								.block();
+		return response;
 	}
 }
