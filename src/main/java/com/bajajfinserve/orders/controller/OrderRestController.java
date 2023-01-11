@@ -1,5 +1,6 @@
 package com.bajajfinserve.orders.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -46,5 +47,13 @@ public class OrderRestController {
 	@DeleteMapping("/{id}")
 	public void deleteOrder(@PathVariable("id") long orderId) {
 		this.orderService.deleteById(orderId);
+	}
+	
+	@GetMapping("/price")
+	public List<Order> fetchOrdersByPriceRange(
+			@RequestParam(name="min", defaultValue = "400", required = false) double min,
+			@RequestParam(name="max", defaultValue = "2000", required = false) double max
+			){
+		return this.orderService.findOrdersByPriceRange(min, max);
 	}
 }
