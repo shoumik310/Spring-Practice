@@ -29,22 +29,21 @@ public class OrderService {
 		// if you are using Java 11
 		// return Set.copyOf(orderRepository.findAll());
 
-		Sort.Direction direction = strDirection.equalsIgnoreCase("asc") ? Sort.Direction.ASC: Sort.Direction.DESC;
+		Sort.Direction direction = strDirection.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
 		PageRequest pageRequest = PageRequest.of(page, size, direction, property);
-		
+
 		Page<Order> pageResponse = this.orderRepository.findAll(pageRequest);
-		
+
 		long totalRecords = pageResponse.getTotalElements();
 		int pages = pageResponse.getTotalPages();
 		Set<Order> data = pageResponse.toSet();
-		
-		
+
 		Map<String, Object> responseMap = new LinkedHashMap<>();
-		
+
 		responseMap.put("total-records", totalRecords);
 		responseMap.put("pages", pages);
 		responseMap.put("content", data);
-		
+
 		return responseMap;
 	}
 
@@ -63,9 +62,23 @@ public class OrderService {
 	public void deleteById(long orderId) {
 		this.orderRepository.deleteById(orderId);
 	}
-	
-	public List<Order> findOrdersByPriceRange(double minPrice, double maxPrice){
-		return this.orderRepository.findByPriceBetween(minPrice, maxPrice);
+
+	public Map<String, Object> findOrdersByPriceRange(int page, int size, double minPrice, double maxPrice) {
+		PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.ASC, "price");
+
+		Page<Order> pageResponse = this.orderRepository.findByPriceBetween(minPrice, maxPrice, pageRequest);
+
+		long totalRecords = pageResponse.getTotalElements();
+		int pages = pageResponse.getTotalPages();
+		Set<Order> data = pageResponse.toSet();
+
+		Map<String, Object> responseMap = new LinkedHashMap<>();
+
+		responseMap.put("total-records", totalRecords);
+		responseMap.put("pages", pages);
+		responseMap.put("content", data);
+
+		return responseMap;
 	}
 
 }

@@ -21,39 +21,38 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/v1/orders")
 @RequiredArgsConstructor
 public class OrderRestController {
-	
+
 	private final OrderService orderService;
-	
+
 	@GetMapping
-	public Map<String, Object> fetchOrders(
-			@RequestParam(name = "page", defaultValue = "0", required = false) int page,
-			@RequestParam(name = "size", defaultValue = "10", required = false) int size, 
-			@RequestParam(name = "sort", defaultValue = "asc", required = false) String direction, 
-			@RequestParam(name = "field", defaultValue = "name", required = false) String property
-			){
+	public Map<String, Object> fetchOrders(@RequestParam(name = "page", defaultValue = "0", required = false) int page,
+			@RequestParam(name = "size", defaultValue = "10", required = false) int size,
+			@RequestParam(name = "sort", defaultValue = "asc", required = false) String direction,
+			@RequestParam(name = "field", defaultValue = "name", required = false) String property) {
 		return this.orderService.fetchAll(page, size, direction, property);
 	}
-	
+
 	@GetMapping("/{id}")
 	public Order fetchOrderById(@PathVariable("id") long orderId) {
 		return this.orderService.findById(orderId);
 	}
-	
+
 	@PostMapping
 	public Order saveOrder(@RequestBody Order order) {
 		return this.orderService.save(order);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public void deleteOrder(@PathVariable("id") long orderId) {
 		this.orderService.deleteById(orderId);
 	}
-	
+
 	@GetMapping("/price")
-	public List<Order> fetchOrdersByPriceRange(
-			@RequestParam(name="min", defaultValue = "400", required = false) double min,
-			@RequestParam(name="max", defaultValue = "2000", required = false) double max
-			){
-		return this.orderService.findOrdersByPriceRange(min, max);
+	public Map<String, Object> fetchOrdersByPriceRange(
+			@RequestParam(name = "page", defaultValue = "0", required = false) int page,
+			@RequestParam(name = "size", defaultValue = "10", required = false) int size,
+			@RequestParam(name = "min", defaultValue = "400", required = false) double min,
+			@RequestParam(name = "max", defaultValue = "2000", required = false) double max) {
+		return this.orderService.findOrdersByPriceRange(page, size, min, max);
 	}
 }

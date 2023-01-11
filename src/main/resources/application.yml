@@ -1,6 +1,6 @@
 app:
   loadUser: false
-  orderCount: 100000
+  orderCount: 1000
 debug: false
 
 server:
