@@ -40,13 +40,12 @@ public class User {
 	private double salary;
 	@ManyToMany(
 			mappedBy = "users", 
-			cascade = CascadeType.ALL,
 			fetch = FetchType.EAGER)
 	private Set<Role> roles;
 	
 	
 	public void addRole(Role role) {
-		if(ObjectUtils.allNull(roles)) {
+		if(this.roles == null) {
 			this.roles = new HashSet<>();
 		}
 		this.roles.add(role);
