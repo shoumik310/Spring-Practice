@@ -11,7 +11,7 @@ public class DomainUserDetails implements UserDetails{
 	
 	private final User user;
 
-	private DomainUserDetails(User user) {
+	public DomainUserDetails(User user) {
 		this.user = user;
 	}
 

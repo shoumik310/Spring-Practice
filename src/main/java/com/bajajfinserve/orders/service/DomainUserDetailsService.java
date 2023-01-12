@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.bajajfinserve.orders.dao.UserJpaRepository;
+import com.bajajfinserve.orders.model.DomainUserDetails;
 import com.bajajfinserve.orders.model.User;
 
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class DomainUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User domainUser = this.userRepository
 							.findByName(username).orElseThrow(() -> new UsernameNotFoundException("bad credentials"));
-		return null;
+		return new DomainUserDetails(domainUser);
 	}
 
 }
