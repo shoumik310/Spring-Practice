@@ -1,5 +1,6 @@
 package com.bajajfinserve.orders.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -10,8 +11,23 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.ObjectUtils;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 @Entity
 @Table(name="users")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@EqualsAndHashCode(exclude = "roles")
+@ToString(exclude = "roles")
 public class User {
 	
 	@Id
@@ -24,5 +40,14 @@ public class User {
 	@ManyToMany(
 			mappedBy = "users", 
 			cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	private Set<Role> roles;
+	private Set<Role> roles = new HashSet<>();
+	
+	
+	public void addRole(Role role) {
+		if(ObjectUtils.allNull(roles)) {
+			this.roles = new HashSet<>();
+		}
+		this.roles.add(role);
+		role.getUsers().add(this);
+	}
 }
