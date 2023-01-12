@@ -38,7 +38,7 @@ public class Role {
 			joinColumns = @JoinColumn(name="role_id", nullable = false),
 			inverseJoinColumns = @JoinColumn(name="user_id", nullable = false)
 			)
-	private Set<User> users = new HashSet<>();
+	private Set<User> users;
 	
 	public Set<User> getUsers(){
 		if(this.users == null) {

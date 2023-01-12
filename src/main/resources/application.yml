@@ -1,6 +1,6 @@
 app:
   loadUser: false
-  orderCount: 1000
+  orderCount: 1
 debug: false
 
 server:
@@ -13,7 +13,7 @@ spring:
     url: jdbc:h2:mem:orders_db
   jpa:
     generate-ddl: true
-    show-sql: false
+    show-sql: true
     properties:
       hibernate:
         format_sql: true

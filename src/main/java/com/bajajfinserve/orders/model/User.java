@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,8 +40,9 @@ public class User {
 	private double salary;
 	@ManyToMany(
 			mappedBy = "users", 
-			cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	private Set<Role> roles = new HashSet<>();
+			cascade = CascadeType.ALL,
+			fetch = FetchType.EAGER)
+	private Set<Role> roles;
 	
 	
 	public void addRole(Role role) {

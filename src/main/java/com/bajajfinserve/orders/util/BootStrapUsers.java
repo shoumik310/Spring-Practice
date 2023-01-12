@@ -20,7 +20,6 @@ public class BootStrapUsers {
 	
 	
 	@EventListener(ApplicationReadyEvent.class)
-	@Transactional
 	public void onApplicationStartup(ApplicationReadyEvent event) {
 		
 		User kiran = User.builder().name("kiran").password("welcome").salary(4500000).build();
