@@ -5,6 +5,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bajajfinserve.orders.dao.RoleJpaRepository;
 import com.bajajfinserve.orders.dao.UserJpaRepository;
@@ -23,18 +24,19 @@ public class BootStrapUsers {
 	
 	
 	@EventListener(ApplicationReadyEvent.class)
+	@Transactional
 	public void onApplicationStartup(ApplicationReadyEvent event) {
 		
-		User kiran = User.builder().name("kiran").password(this.passwordEncoder.encode("welcome")).salary(4500000).build();
+		User kiran = new User("kiran", this.passwordEncoder.encode("welcome"), 4500000);
 		
-		User vinay = User.builder().name("vinay").password(this.passwordEncoder.encode("welcome")).salary(5500000).build();
+		User vinay = new User("vinay", this.passwordEncoder.encode("welcome"), 4500000);		
 		
-		Role userRole = Role.builder().roleName("ROLE_USER").build();
 		
-		Role adminRole = Role.builder().roleName("ROLE_ADMIN").build();
 		
-		this.roleRepository.save(userRole);
-		this.roleRepository.save(adminRole);
+		Role userRole = new Role("ROLE_USER");
+		
+		Role adminRole = new Role("ROLE_ADMIN");
+		
 		
 		kiran.addRole(userRole);
 		
@@ -43,6 +45,7 @@ public class BootStrapUsers {
 		
 		this.userRepository.save(kiran);
 		this.userRepository.save(vinay);
+	
 		
 	}
 

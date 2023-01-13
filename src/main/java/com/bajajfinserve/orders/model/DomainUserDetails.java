@@ -27,7 +27,7 @@ public class DomainUserDetails implements UserDetails{
 
 	@Override
 	public String getPassword() {
-		return this.getPassword();
+		return this.user.getPassword();
 	}
 
 	@Override
