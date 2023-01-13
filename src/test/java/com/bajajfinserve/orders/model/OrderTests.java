@@ -2,10 +2,37 @@ package com.bajajfinserve.orders.model;
 
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class OrderTests {
+	
+	private Order order;
+	
+	@BeforeAll
+	static void beforeAll() {
+		System.out.println("============== Order Tests executed - start ===============");
+	}
+	
+	@AfterAll
+	static void afterAll() {
+		System.out.println("=============== Order Teste executed - end ===============");
+	}
+	
+	@BeforeEach
+	void configure() {
+		order = Order.builder().name("vinay").email("vinay@gmail.com").orderDate(LocalDate.now())
+				.creditCardNumber("11223344").build();
+	}
+	
+	@AfterEach
+	void tearDown(){
+		order = null;
+	}
 	
 	@Test
 	void testNoArgsConstructor() {
@@ -16,8 +43,6 @@ public class OrderTests {
 	
 	@Test
 	void testAllArgsConstructor() {
-		Order order = Order.builder().name("vinay").email("vinay@gmail.com").orderDate(LocalDate.now())
-				.creditCardNumber("11223344").build();
 		
 		Assertions.assertNotNull(order);
 		Assertions.assertEquals("vinay", order.getName());
@@ -30,9 +55,6 @@ public class OrderTests {
 
 	@Test
 	void testsetName() {
-		Order order = Order.builder().name("vinay").email("vinay@gmail.com").orderDate(LocalDate.now())
-				.creditCardNumber("11223344").build();
-		
 		order.setName("Harish");
 		Assertions.assertNotNull(order);
 		Assertions.assertEquals("Harish", order.getName());
