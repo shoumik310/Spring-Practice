@@ -1,5 +1,6 @@
 package com.bajajfinserve.orders.controller;
 
+import java.time.Duration;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -20,6 +21,8 @@ import com.bajajfinserve.orders.model.Order;
 import com.bajajfinserve.orders.service.OrderService;
 
 import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Mono;
+import reactor.util.retry.Retry;
 
 @RestController
 @RequestMapping("/api/v1/orders")
@@ -65,11 +68,42 @@ public class OrderRestController {
 	
 	@GetMapping("/users")
 	public String fetchAllUsers() {
-		String response = this.webClient
-								.get()
-								.uri("/users")
-								.exchangeToMono((res) -> res.bodyToMono(String.class))
-								.block();
-		return response;
+						Mono<String> monoResponse = this.webClient
+															.get()
+															.uri("/users")
+															.retrieve()
+												            .bodyToMono(String.class)
+												            .timeout(Duration.ofSeconds(5))
+												            .retryWhen(
+												                    Retry.backoff(4, Duration.ofSeconds(5))
+												                            .filter(throwable -> throwable instanceof Exception));
+															
+								/*.exchangeToMono((res) -> res.bodyToMono(String.class))
+								.block();*/
+		
+								/*
+								 * ResponseSpec responseValue = retrieve.onStatus(status ->
+								 * status.is2xxSuccessful(), (value) -> { Mono<String> response =
+								 * value.bodyToMono(String.class); System.out.println(response); return null;
+								 * 
+								 * });
+								 */
+		
+								/*
+								 * String response = webClient.post() .uri(new
+								 * URI("https://jsonplaceholder.typicode.org")) .header("Authorization",
+								 * "Bearer MY_SECRET_TOKEN") .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+								 * .accept(MediaType.APPLICATION_JSON)
+								 * .body(BodyInserters.fromFormData(bodyValues)) .retrieve()
+								 * .bodyToMono(String.class) .block();
+								 */
+						
+						
+							return monoResponse.block();
+	}
+
+	private Object handleError(String reasonPhrase) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
