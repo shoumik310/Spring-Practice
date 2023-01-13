@@ -1,0 +1,23 @@
+app:
+  loadUser: false
+  orderCount: 1
+debug: false
+
+server:
+  port: 8222
+  
+spring:
+  datasource:
+    username: sa
+    password: welcome
+    url: jdbc:h2:mem:orders_db
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+logging:
+  level:
+    root: INFO
