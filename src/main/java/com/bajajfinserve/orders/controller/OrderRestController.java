@@ -21,6 +21,10 @@ import org.springframework.web.reactive.function.client.WebClient;
 import com.bajajfinserve.orders.model.Order;
 import com.bajajfinserve.orders.service.OrderService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
@@ -34,7 +38,26 @@ public class OrderRestController {
 	private final WebClient webClient;
 
 	@GetMapping
+	@ApiResponses(value = {
+			@ApiResponse(
+					description = "returns all the Orders",
+					responseCode = "200"
+					),
+			@ApiResponse(
+					description = "Un-Authorized access",
+					responseCode = "401"
+					),
+			@ApiResponse(
+					description = "Access denied",
+					responseCode = "403"
+					)
+	})
 	//@GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@Operation(method = "GET", description = "fetches all the order",
+			parameters = { 
+				@Parameter(name = "page", example = "10", allowEmptyValue = false, deprecated = true)
+			}
+	)
 	public Map<String, Object> fetchOrders(@RequestParam(name = "page", defaultValue = "0", required = false) int page,
 			@RequestParam(name = "size", defaultValue = "10", required = false) int size,
 			@RequestParam(name = "sort", defaultValue = "asc", required = false) String direction,
