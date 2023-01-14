@@ -43,7 +43,7 @@ public class AppSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.headers().frameOptions().disable();
 
 		http.authorizeHttpRequests().antMatchers("/h2-console**", "/login**", "/logout**", "/contact-us**").permitAll()
-				.antMatchers(HttpMethod.GET, "/api/v1/orders**").hasAnyRole("Everyone", "super_admins", "admins")
+				.antMatchers(HttpMethod.GET, "/api/v1/orders**").permitAll()
 				.antMatchers(HttpMethod.POST, "/api/v1/orders**").hasAnyRole("super_admins", "admins")
 				.antMatchers(HttpMethod.DELETE, "/api/v1/orders/**").hasAnyRole("super_admins").and()
 				.oauth2ResourceServer().jwt();
