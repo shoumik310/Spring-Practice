@@ -1,3 +1,15 @@
 spring:
   profiles:
     active: qa
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  
+
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: true
