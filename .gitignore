@@ -1,0 +1,13 @@
+.metadata/
+Servers/
+
+core/.settings/
+core/target/
+core/.classpath
+core/.project
+
+core/.settings/
+core/build/
+core/target/
+core/.classpath
+core/.project
