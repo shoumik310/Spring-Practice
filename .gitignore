@@ -11,3 +11,5 @@ core/build/
 core/target/
 core/.classpath
 core/.project
+
+BuyIt/db.mv.db
