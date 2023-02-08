@@ -1,0 +1,3 @@
+2023-02-08 16:15:59 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "delete [*]* FROM PRODUCT"; expected "identifier"; SQL statement:
+delete * FROM PRODUCT [42001-212]
