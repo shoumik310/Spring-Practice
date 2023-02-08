@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.kimuohs.buyit.dto.ProductDTO;
 import com.kimuohs.buyit.model.Category;
 import com.kimuohs.buyit.service.CategoryService;
+import com.kimuohs.buyit.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,12 +23,16 @@ public class AdminController {
 
 	@Autowired
 	private final CategoryService _categoryService;
+	@Autowired
+	private final ProductService _productService;
 
 	@GetMapping("/admin")
 	public String adminHome() {
 		return "adminHome";
 	}
 
+	// Categories Section
+	
 	@GetMapping("/admin/categories")
 	public String getCategories(Model model) {
 		model.addAttribute("categories", _categoryService.getAllCategories());
@@ -61,4 +67,21 @@ public class AdminController {
 			return "404";
 		}
 	}
+	
+	// Product Section
+	
+	@GetMapping("/admin/products")
+	public String getProducts(Model model) {
+		model.addAttribute("products", _productService.getAllProducts());
+		return "products";
+	}
+	
+	@GetMapping("/admin/products/add")
+	public String getProductsAdd(Model model) {
+		model.addAttribute("productDTO", new ProductDTO());
+		model.addAttribute("categories", _categoryService.getAllCategories());
+		return "productsAdd";
+	}
+	
+	
 }
