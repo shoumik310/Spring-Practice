@@ -115,5 +115,22 @@ public class AdminController {
 		return "redirect:/admin/products";
 	}
 
+	@GetMapping("/admin/product/delete/{id}")
+	public String deleteProduct(@PathVariable long id) {
+		_productService.deleteProductById(id);
+		return "redirect:/admin/products";
+	}
+
+	@GetMapping("/admin/product/update/{id}")
+	public String updateProduct(@PathVariable long id, Model model) {
+		Product product = _productService.getProductById(id).get();
+		ProductDTO productDTO = ProductDTO.builder().id(product.getId()).name(product.getName())
+				.price(product.getPrice()).weight(product.getWeight()).description(product.getDescription())
+				.categoryId(product.getCategory().getId()).imageName(product.getImageName()).build();
+		
+		model.addAttribute("categories",_categoryService.getAllCategories());
+		model.addAttribute(productDTO);
+		return "productsAdd";
+	}
 
 }
