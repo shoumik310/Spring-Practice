@@ -2,10 +2,12 @@ package com.kimuohs.buyit.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kimuohs.buyit.model.Category;
 import com.kimuohs.buyit.model.Product;
 import com.kimuohs.buyit.repository.ProductRepository;
 
@@ -31,11 +33,14 @@ public class ProductService {
 	}
 
 	public void addProduct(Product product) {
+		if(product.getImageName() == null || product.getImageName().length() == 0) {
+			product.setImageName("stock.jpg");
+		}
 		_productRepository.save(product);
 	}
 
 	public void deleteProductById(long productId) {
 		_productRepository.deleteById(productId);
 	}
-
+	
 }
