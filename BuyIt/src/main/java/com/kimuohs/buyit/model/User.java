@@ -25,6 +25,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,7 +42,7 @@ public class User {
 	@Email(message = "{errors.invalid_email}")
 	private String email;
 
-	@NotEmpty
+	//Allowed to be empty as oauth doesn't give password
 	private String password;
 
 	/**
