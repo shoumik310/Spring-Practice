@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.kimuohs.buyit.global.GlobalData;
 import com.kimuohs.buyit.model.User;
 import com.kimuohs.buyit.repository.RoleRepository;
 import com.kimuohs.buyit.repository.UserRepository;
@@ -27,6 +28,7 @@ public class LoginController {
 
 	@GetMapping("/login")
 	String getLogin() {
+		GlobalData.cart.clear(); //Jugadu Solution TODO: Find better Solution
 		return "login";
 	}
 

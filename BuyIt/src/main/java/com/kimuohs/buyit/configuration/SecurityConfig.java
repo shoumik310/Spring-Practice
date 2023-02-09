@@ -15,7 +15,7 @@ import com.kimuohs.buyit.service.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter { //TODO: Remove deprecated
 
 	@Autowired
 	GoogleOAuth2SuccessHandler googleOAuth2SuccessHandler;
