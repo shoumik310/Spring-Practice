@@ -13,8 +13,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
+@Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,9 +24,9 @@ public class Product {
 	private long id;
 	private String name;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY) // Since Many of "Product" type can go to one "Category"
 	@JoinColumn(name = "category_id", referencedColumnName = "category_id")
-	private Category category;
+	private Category category; // Since it is many to one, only one object is needed
 
 	private double price;
 	private double weight;
