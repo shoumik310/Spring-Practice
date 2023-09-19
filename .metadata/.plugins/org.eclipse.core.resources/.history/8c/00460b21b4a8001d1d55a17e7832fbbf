@@ -1,0 +1,5 @@
+package com.kimuohs.buyit.service;
+
+public class CustomUserDetailsService {
+
+}

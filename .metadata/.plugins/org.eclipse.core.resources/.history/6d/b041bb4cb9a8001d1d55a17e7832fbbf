@@ -1,0 +1,29 @@
+package com.kimuohs.buyit.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.kimuohs.buyit.repository.RoleRepository;
+import com.kimuohs.buyit.repository.UserRepository;
+
+@Controller
+public class LoginController {
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
+	@Autowired
+	UserRepository userRepository;
+	@Autowired
+	RoleRepository roleRepository;
+	
+	@GetMapping("/login")
+	String getLogin() {
+		return "login";
+	}
+	
+	@GetMapping("/register")
+	String getRegister() {
+		return "register";
+	}
+}

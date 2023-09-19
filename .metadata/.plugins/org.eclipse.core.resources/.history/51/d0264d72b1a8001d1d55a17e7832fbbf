@@ -1,0 +1,5 @@
+package com.kimuohs.buyit.repository;
+
+public class UserRepository {
+
+}

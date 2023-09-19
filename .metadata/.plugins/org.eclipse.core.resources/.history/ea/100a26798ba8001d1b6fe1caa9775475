@@ -1,0 +1,5 @@
+package com.kimuohs.buyit.model;
+
+public class Role {
+
+}

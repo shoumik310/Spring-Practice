@@ -1,0 +1,10 @@
+
+package com.kimuohs.buyit.configuration;
+
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
+
+@Component
+public class GoogleOAuth2SuccessHandler implements AuthenticationSuccessHandler {
+
+}

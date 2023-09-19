@@ -1,0 +1,5 @@
+package com.kimuohs.buyit.configuration;
+
+public class GoogleOAuth2SuccessHandler {
+
+}
